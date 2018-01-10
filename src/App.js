@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import List from './List';
 import axios from 'axios';
 
 class App extends Component {
@@ -14,41 +14,29 @@ class App extends Component {
   }
 
   getPhoneBill() {
-    // axios.get('../test.json')
-    axios.get('../phoneBill1.json')
-      // axios.get('../phoneBill.json')
+    axios.get('../phoneBill.json')
       .then((res) => {
-        // console.log('test.json', res.config);
-        console.log('test.json', res.data);
-        // console.log('test.json', res.headers);
-        // console.log('test.json', res.request);
-        // console.log('test.json', res.status);
-        // console.log('test.json', res.statusText);
-
-        // this.state.phoneBills = res.data.phoneBill;
-
+        // console.log('test.json', res.data);
         this.setState({
           phoneBills: res.data.phoneBill
-        })
-
-        console.log('state.phoneBills', this.state.phoneBills);
+        });
+        // console.log('state.phoneBills', this.state.phoneBills);
       })
       .catch((err) => {
         console.error(err);
+        alert("phoneBill.json not found.");
       })
   }
 
+  componentDidMount() {
+    this.getPhoneBill();
+  }
+
   render() {
-    this.getPhoneBill()
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        {/* <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p> */}
+      <div>
+        <h1 className="App">ค่าบริการ</h1>
+        <List phoneBills={this.state.phoneBills} />
       </div>
     );
   }
