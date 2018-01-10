@@ -37,9 +37,13 @@ class App extends Component {
         console.error(err);
       })
   }
+  
+  componentDidMount() {
+    this.getPhoneBill();
+  }
 
   render() {
-    this.getPhoneBill()
+    
     return (
       <div className="App">
         <header className="App-header">
